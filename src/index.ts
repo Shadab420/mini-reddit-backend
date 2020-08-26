@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { MikroORM } from '@mikro-orm/core';
 import { __prod__ } from './constants';
 import { Post } from './entities/post';
@@ -6,6 +7,7 @@ import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { HelloResolver } from './resolvers/hello';
+import { PostResolver } from './resolvers/post';
 
 
 const main = async () => {
@@ -17,11 +19,14 @@ const main = async () => {
 
     const app = express();
 
+    //creating apollo graphql server
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [HelloResolver],
+            resolvers: [HelloResolver, PostResolver], //enable us to query/mutate graphql data
             validate: false
-        })
+        }),
+
+        context: () => ({ em: orm.em }) //for giving Pgsql data access to graphql we are passing MicroORM entitymanager to apollo server.
     })
 
     apolloServer.applyMiddleware({ app });
