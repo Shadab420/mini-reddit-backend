@@ -6,12 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const post_1 = require("./entities/post");
 const constants_1 = require("./constants");
 const path_1 = __importDefault(require("path"));
+const user_1 = require("./entities/user");
 exports.default = {
     migrations: {
         path: path_1.default.join(__dirname, './migrations'),
         pattern: /^[\w-]+\d+\.[tj]s$/,
     },
-    entities: [post_1.Post],
+    entities: [post_1.Post, user_1.User],
     dbName: 'minireddit',
     user: 'postgres',
     password: 'sDb106710',

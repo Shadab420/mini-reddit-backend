@@ -2,6 +2,7 @@ import { Post } from "./entities/post";
 import { __prod__ } from "./constants";
 import { MikroORM } from '@mikro-orm/core';
 import path from 'path';
+import { User } from "./entities/user";
 
 export default {
 
@@ -10,7 +11,7 @@ export default {
         pattern: /^[\w-]+\d+\.[tj]s$/,
     },
 
-    entities: [Post],
+    entities: [Post, User],
     dbName: 'minireddit',
     user: 'postgres',
     password: 'sDb106710',

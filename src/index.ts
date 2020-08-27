@@ -15,7 +15,8 @@ const main = async () => {
     const orm = await MikroORM.init(mikroORMConfig);
 
     //run migrations automatically
-    await orm.getMigrator().up();
+    const migrator = orm.getMigrator();
+    await migrator.up(); // runs migrations up to the latest
 
     const app = express();
 
