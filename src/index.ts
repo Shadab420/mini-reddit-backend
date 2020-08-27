@@ -8,6 +8,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { HelloResolver } from './resolvers/hello';
 import { PostResolver } from './resolvers/post';
+import { UserResolver } from './resolvers/user';
 
 
 const main = async () => {
@@ -23,7 +24,7 @@ const main = async () => {
     //creating apollo graphql server
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [HelloResolver, PostResolver], //enable us to query/mutate graphql data
+            resolvers: [HelloResolver, PostResolver, UserResolver], //enable us to query/mutate graphql data
             validate: false
         }),
 
