@@ -50,7 +50,7 @@ export class UserResolver {
             return {
                 errors: [{
                     field: "password",
-                    message: "Password should be at least 6 characters long!";
+                    message: "Password should be at least 6 characters long!"
                 }]
             }
         }
@@ -83,7 +83,7 @@ export class UserResolver {
     @Mutation(() => UserResponse)
     async login(
         @Arg('options', ()=>UsernamePasswordInput) options: UsernamePasswordInput,
-        @Ctx() {em}: MyContext
+        @Ctx() {em, req}: MyContext
     ): Promise<UserResponse> {
         const user = await em.findOne(User, {username: options.username})
     
@@ -107,8 +107,10 @@ export class UserResolver {
             }
         }
 
+        req.session.userId = user.id;
+
         return {
-             user
+            user
         }
     }
 

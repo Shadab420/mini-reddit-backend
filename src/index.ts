@@ -43,6 +43,7 @@ const main = async () => {
                 secure: __prod__, //use https during production
                 sameSite: 'lax' //protection for csrf
             },
+            saveUninitialized: false, //stop creating default session with no data.
             secret: 'keyboard cat',
             resave: false,
 
